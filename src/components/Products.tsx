@@ -1,7 +1,3 @@
-import { BellRing, Check } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,18 +7,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function Products() {
   return (
-    <Card className="max-w-sm">
+    <Card className="max-w-sm rounded-[.5rem]">
       <CardHeader className="pb-3">
-        <CardTitle>Lucide</CardTitle>
-        <CardDescription>
-          A simply beautiful icon set made for designers and developers.
-        </CardDescription>
+        <CardTitle>yeah kk ding</CardTitle>
+        <CardDescription>KAANKERRRRR</CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent className="pt-3">blablabla</CardContent>
+      <CardContent className="py-3">
+        <Image
+          className="object-cover rounded-[.25rem]"
+          src="/images/product1.png"
+          width={300}
+          height={250}
+          alt="hey"
+        />
+      </CardContent>
+      <Separator />
+      <CardContent className="py-3">€2,95</CardContent>
     </Card>
   );
 }
