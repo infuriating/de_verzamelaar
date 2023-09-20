@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import GetAllProducts from "@/lib/PrismaFunctions/GetAllProducts";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import AddToCartButton from "./AddToCartButton";
 
 export default async function Products() {
   const products = await GetAllProducts();
@@ -38,9 +39,11 @@ export default async function Products() {
           <Separator />
           <CardFooter className="py-3 flex justify-between">
             <p>€{product.price}</p>
-            <Button className="rounded-[.5rem]" variant={"outline"}>
-              Add to cart
-            </Button>
+            <AddToCartButton
+              itemId={product.id}
+              name={product.name}
+              price={product.price}
+            />
           </CardFooter>
         </Card>
       ))}
