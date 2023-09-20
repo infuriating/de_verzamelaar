@@ -6,23 +6,9 @@ datasource db {
   provider = "sqlite"
   url      = "file:./verzameling.db"
 }
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // relations
-  // collections Collection[]
-}
-
 model Product {
   id        Int      @id @default(autoincrement())
   name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // relations
-  // collections Collection[]
+  price     Float
+  description String
 }
