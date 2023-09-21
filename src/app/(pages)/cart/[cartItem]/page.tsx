@@ -21,6 +21,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { cartItem: string };
+}) {
+  return {
+    title: `FNS Cameras | ${params.cartItem.replace("%20", " ")} - Checkout`,
+  };
+}
 
 export default async function page({
   params,
@@ -32,8 +43,12 @@ export default async function page({
     (product) => product.name === params.cartItem.replace("%20", " ")
   );
 
+  if (!product) {
+    redirect("/products");
+  }
+
   return (
-    <div className="grid grid-cols-1 gap-4 lg:gap-8 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:gap-8 lg:grid-cols-2 pb-4">
       <Card>
         <CardHeader>
           <CardTitle>{product?.name}</CardTitle>
@@ -42,19 +57,19 @@ export default async function page({
         <Separator />
         <CardContent className="p-2 flex flex-col">
           <Image
-            className="p-4 object-cover w-full aspect-[3/2]"
+            className="p-4 object-cover aspect-[3/2]"
             src={`/products/${product?.name
               .toLowerCase()
               .replace(" ", "_")
               .replace(".", "")}.png`}
             alt={product?.name || "Product"}
-            width={500}
+            width={600}
             height={200}
           />
         </CardContent>
         <Separator />
         <CardFooter className="py-3">
-          <p>€{product?.price}</p>
+          <p>€{product?.price.toFixed(2)}</p>
         </CardFooter>
       </Card>
       <Card>
