@@ -9,14 +9,15 @@ import {
 import { Separator } from "@/components/ui/separator";
 import GetAllProducts from "@/lib/PrismaFunctions/GetAllProducts";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "./PurchaseButton";
+import PurchaseButton from "./PurchaseButton";
 
 export default async function Products() {
   const products = await GetAllProducts();
 
   return (
-    <div className="grid grid-cols-4 gap-4 pb-4">
+    <div className="grid place-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 pb-4">
+      {/* @ts-ignore */}
       {products.map((product) => (
         <Card className="max-w-md rounded-[.35rem]" key={product.id}>
           <CardHeader className="pb-3">
@@ -39,11 +40,7 @@ export default async function Products() {
           <Separator />
           <CardFooter className="py-3 flex justify-between">
             <p>€{product.price}</p>
-            <AddToCartButton
-              itemId={product.id}
-              name={product.name}
-              price={product.price}
-            />
+            <PurchaseButton name={product.name} />
           </CardFooter>
         </Card>
       ))}
