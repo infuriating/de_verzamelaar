@@ -9,8 +9,12 @@ interface Props {
 }
 
 export default function PurchaseButton({ name }: Props) {
+  function storeItemLocally() {
+    localStorage.setItem("product", name);
+  }
+
   return (
-    <Link href={`/cart/${name}`}>
+    <Link href={`/cart/${name}`} onClick={storeItemLocally}>
       <Button className="rounded-[.5rem]" variant={"outline"}>
         Purchase
       </Button>
