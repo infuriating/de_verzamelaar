@@ -8,32 +8,32 @@ import React from "react";
 export default async function page() {
   const reviews = await GetAllReviews();
 
-  console.log(reviews);
-
   return (
     <>
-      {reviews.map((review) => (
-        <Card
-          className="flex flex-col items-center justify-center max-w-lg p-4 rounded-[.25rem]"
-          key={review.id}
-        >
-          <h1 className="text-2xl font-semibold">
-            {review.title} <span className="text-xl"> - {review.name}</span>
-          </h1>
-          <p>{review.body}</p>
-          <div className="flex">
-            {Array.from(Array(review.rating).keys()).map((i) => (
-              <ActiveStar key={i} />
-            ))}
-            {Array.from(Array(5 - review.rating).keys()).map((i) => (
-              <Star key={i} />
-            ))}
-          </div>
-        </Card>
-      ))}
+      <div className="grid grid-cols-2 gap-2 place-items-center">
+        {reviews.map((review) => (
+          <Card
+            className="flex flex-col items-center justify-center max-w-lg p-4 rounded-[.25rem]"
+            key={review.id}
+          >
+            <h1 className="text-2xl font-semibold">
+              {review.title} <span className="text-xl"> - {review.name}</span>
+            </h1>
+            <p>{review.body}</p>
+            <div className="flex py-2 gap-[0.2rem]">
+              {Array.from(Array(review.rating).keys()).map((i) => (
+                <ActiveStar key={i} />
+              ))}
+              {Array.from(Array(5 - review.rating).keys()).map((i) => (
+                <Star key={i} />
+              ))}
+            </div>
+          </Card>
+        ))}
+      </div>
       <Link
         href={"/post-a-review"}
-        className="flex w-full justify-center items-center"
+        className="flex pt-4 w-full justify-center items-center"
       >
         <Button className="rounded-[.25rem] font-semibold">
           Post a Review
