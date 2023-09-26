@@ -7,4 +7,8 @@ export const NavPages = [
     name: "Cart",
     href: "/cart",
   },
+  {
+    name: "Reviews",
+    href: "/reviews",
+  },
 ];
