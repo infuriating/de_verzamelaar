@@ -24,6 +24,13 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import ClearCartButton from "@/components/ClearCartButton";
 
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -41,7 +48,7 @@ export default async function page({
 }) {
   const products = await GetAllProducts();
   let product = products.find(
-    (product) => product.name === params.cartItem.replace("%20", " ")
+    (product: Product) => product.name === params.cartItem.replace("%20", " ")
   );
 
   if (!product) {
