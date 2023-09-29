@@ -5,13 +5,21 @@ import GetAllReviews from "@/lib/PrismaFunctions/GetAllReviews";
 import Link from "next/link";
 import React from "react";
 
+type ReviewProps = {
+  id: number;
+  title: string;
+  body: string;
+  rating: number;
+  name: string;
+};
+
 export default async function page() {
   const reviews = await GetAllReviews();
 
   return (
     <>
       <div className="grid grid-cols-2 gap-2 place-items-center">
-        {reviews.map((review) => (
+        {reviews.map((review: ReviewProps) => (
           <Card
             className="flex flex-col items-center justify-center max-w-lg p-4 rounded-[.25rem]"
             key={review.id}
