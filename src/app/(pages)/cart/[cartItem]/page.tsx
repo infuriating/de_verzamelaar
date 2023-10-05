@@ -86,7 +86,8 @@ export default async function page({
             <CardHeader>
               <CardTitle>Payment Method</CardTitle>
               <CardDescription>
-                Add a new payment method to your account.
+                Fill in your address and payment details to complete your
+                purchase.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
@@ -118,10 +119,38 @@ export default async function page({
                   </Label>
                 </div>
               </RadioGroup>
-              <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="First Last" />
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  className="invisible absolute"
+                  id="item"
+                  value={product?.name}
+                />
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" placeholder="First Last" />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" placeholder="Email" />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="address">Street</Label>
+                  <Input id="address" placeholder="Address" />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="address">House Number</Label>
+                  <Input id="address" placeholder="House Number" />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="address">City</Label>
+                  <Input id="address" placeholder="City" />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="address">Postal Code</Label>
+                  <Input id="address" placeholder="Postal Code" />
+                </div>
               </div>
+              <Separator />
               <div className="grid gap-2">
                 <Label htmlFor="number">Card number</Label>
                 <Input id="number" placeholder="" />
