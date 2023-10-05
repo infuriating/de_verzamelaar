@@ -62,6 +62,9 @@ export default async function page({
           <CardHeader>
             <CardTitle>{product?.name}</CardTitle>
             <CardDescription>{product?.description}</CardDescription>
+            <p className="pt-2 font-semibold text-lg">
+              €{product?.price.toFixed(2)}
+            </p>
           </CardHeader>
           <Separator />
           <CardContent className="p-2 flex flex-col">
@@ -77,9 +80,6 @@ export default async function page({
             />
           </CardContent>
           <Separator />
-          <CardFooter className="py-3">
-            <p>€{product?.price.toFixed(2)}</p>
-          </CardFooter>
         </Card>
         <Card>
           <Card>
@@ -174,7 +174,9 @@ export default async function page({
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Continue</Button>
+              <Button className="w-full">
+                Pay €{product?.price.toFixed(2)}
+              </Button>
             </CardFooter>
           </Card>
         </Card>
