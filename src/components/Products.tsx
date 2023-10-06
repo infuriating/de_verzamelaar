@@ -39,7 +39,8 @@ export default async function Products() {
           </CardContent>
           <Separator />
           <CardFooter className="py-3 flex justify-between">
-            <p>€{product.price.toFixed(2)}</p>
+            {/* @ts-ignore */}
+            <p>€{product.price.toFixed(2) / 100}</p>
             <PurchaseButton name={product.name} />
           </CardFooter>
         </Card>
