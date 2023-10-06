@@ -5,11 +5,9 @@ import React, { useEffect } from "react";
 
 export default function GetLocalStorageItem() {
   useEffect(() => {
-    setTimeout(() => {
-      const localItem = getLocalItem();
-      if (!localItem) redirect("/products");
-      else location.replace(`/cart/${localItem}`);
-    }, 500);
+    const localItem = getLocalItem();
+    if (!localItem) redirect("/products");
+    else location.replace(`/cart/${localItem}`);
   }, []);
 
   function getLocalItem() {
