@@ -18,6 +18,10 @@ type ReviewProps = {
 export default async function page() {
   const reviews = await GetAllReviews();
 
+  reviews.sort((a: ReviewProps, b: ReviewProps) => {
+    return b.id - a.id;
+  });
+
   return (
     <>
       <Link
