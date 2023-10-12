@@ -20,7 +20,15 @@ export default async function page() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-2 place-items-center">
+      <Link
+        href={"/reviewable-orders"}
+        className="flex pb-4 w-full justify-center items-center"
+      >
+        <Button className="rounded-[.25rem] font-semibold">
+          Review one of your orders!
+        </Button>
+      </Link>
+      <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 gap-2 place-items-center">
         {reviews.map((review: ReviewProps) => (
           <Card
             className="flex flex-col items-center justify-center max-w-lg p-4 rounded-[.25rem]"
@@ -50,14 +58,6 @@ export default async function page() {
           </Card>
         ))}
       </div>
-      <Link
-        href={"/reviewable-orders"}
-        className="flex pt-4 w-full justify-center items-center"
-      >
-        <Button className="rounded-[.25rem] font-semibold">
-          Review one of your orders!
-        </Button>
-      </Link>
     </>
   );
 }
