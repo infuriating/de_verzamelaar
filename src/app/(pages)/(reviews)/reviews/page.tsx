@@ -11,6 +11,8 @@ type ReviewProps = {
   body: string;
   rating: number;
   name: string;
+  product: string;
+  createdAt: Date;
 };
 
 export default async function page() {
@@ -24,8 +26,17 @@ export default async function page() {
             className="flex flex-col items-center justify-center max-w-lg p-4 rounded-[.25rem]"
             key={review.id}
           >
+            <p>
+              <span className="text-center text-sm text-neutral-400">
+                {review.product}
+              </span>{" "}
+              -{" "}
+              <span className="text-center text-sm text-neutral-400">
+                {new Date(review.createdAt).toLocaleDateString()}
+              </span>
+            </p>
             <h1 className="text-2xl font-semibold">
-              {review.title} <span className="text-xl"> - {review.name}</span>
+              {review.title} <span className="text-sm"> by {review.name}</span>
             </h1>
             <p>{review.body}</p>
             <div className="flex py-2 gap-[0.2rem]">
@@ -40,11 +51,11 @@ export default async function page() {
         ))}
       </div>
       <Link
-        href={"/post-a-review"}
+        href={"/reviewable-orders"}
         className="flex pt-4 w-full justify-center items-center"
       >
         <Button className="rounded-[.25rem] font-semibold">
-          Post a Review
+          Review one of your orders!
         </Button>
       </Link>
     </>
