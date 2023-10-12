@@ -23,22 +23,43 @@ import {
 } from "@/components/ui/select";
 
 export default function CheckoutCard({ product }: any) {
-  function handleCheckout(e: any) {
+  async function handleCheckout(e: any) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(formData);
+    let name = data.name;
+    let email = data.email;
+    let address = `${data.street} ${data.houseNumber}, ${data.city} ${data.postalCode}`;
+    let item = product.name;
+    let price = product.price;
 
-    // fetch("/api/checkout", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     product,
-    //     data,
-    //   }),
-    // }).then((res) => res.json());
+    try {
+      await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          address,
+          item,
+          price,
+        }),
+      }).then((res) => res.json());
+    } catch {
+      console.error("Something went wrong");
+    }
+
+    let orderedItems = JSON.parse(
+      localStorage.getItem("previousOrders") || "[]"
+    );
+    orderedItems.push(product);
+
+    localStorage.setItem("previousOrders", JSON.stringify(orderedItems));
+    localStorage.removeItem("product");
+
+    window.location.href = "/";
   }
 
   return (
@@ -82,45 +103,60 @@ export default function CheckoutCard({ product }: any) {
               </div>
             </RadioGroup>
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                className="invisible absolute"
-                id="item"
-                value={product?.name}
-              />
               <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="First Last" required />
+                <Input
+                  name="name"
+                  id="name"
+                  placeholder="First Last"
+                  required
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Email" required />
+                <Input name="email" id="email" placeholder="Email" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">Street</Label>
-                <Input id="address" placeholder="Address" required />
+                <Label htmlFor="street">Street</Label>
+                <Input
+                  name="street"
+                  id="street"
+                  placeholder="Street"
+                  required
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">House Number</Label>
-                <Input id="address" placeholder="House Number" required />
+                <Label htmlFor="houseNumber">House Number</Label>
+                <Input
+                  name="houseNumber"
+                  id="houseNumber"
+                  placeholder="House Number"
+                  required
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">City</Label>
-                <Input id="address" placeholder="City" required />
+                <Label htmlFor="city">City</Label>
+                <Input name="city" id="city" placeholder="City" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">Postal Code</Label>
-                <Input id="address" placeholder="Postal Code" required />
+                <Label htmlFor="postalCode">Postal Code</Label>
+                <Input
+                  name="postalCode"
+                  id="postalCode"
+                  placeholder="Postal Code"
+                  required
+                />
               </div>
             </div>
             <Separator />
             <div className="grid gap-2">
               <Label htmlFor="number">Card number</Label>
-              <Input id="number" placeholder="" />
+              <Input id="number" placeholder="" required />
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="month">Expires</Label>
-                <Select>
+                <Select required>
                   <SelectTrigger id="month">
                     <SelectValue placeholder="Month" />
                   </SelectTrigger>
@@ -142,7 +178,7 @@ export default function CheckoutCard({ product }: any) {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="year">Year</Label>
-                <Select>
+                <Select required>
                   <SelectTrigger id="year">
                     <SelectValue placeholder="Year" />
                   </SelectTrigger>
@@ -160,7 +196,7 @@ export default function CheckoutCard({ product }: any) {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="cvc">CVC</Label>
-                <Input id="cvc" placeholder="CVC" />
+                <Input id="cvc" placeholder="CVC" required />
               </div>
             </div>
           </CardContent>
