@@ -16,6 +16,7 @@ model Product {
 model Review {
   id        Int      @id @default(autoincrement())
   name     String
+  product  String
   title     String
   body      String
   rating    Int
