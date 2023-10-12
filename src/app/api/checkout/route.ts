@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 let randomCharacters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const req = await request.json();
 
   const order = await prisma.order.create({
