@@ -13,9 +13,9 @@ export default async function page() {
             key={order.id}
             className="flex gap-2 px-4 py-2 bg-neutral-900 rounded-md"
           >
-            <p>{order.id}</p>|<p>{order.createdAt.toLocaleDateString()}</p>|
-            <p>{order.orderID}</p>|<p>{order.name}</p>|<p>{order.email}</p>|
-            <p>{order.address}</p>|<p>{order.item}</p>
+            <p>{order.createdAt.toLocaleDateString()}</p>|<p>{order.orderID}</p>
+            |<p>{order.name}</p>|<p>{order.email}</p>|<p>{order.address}</p>|
+            <p>{order.item}</p>
           </div>
         );
       })}
