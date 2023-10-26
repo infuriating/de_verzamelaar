@@ -11,4 +11,8 @@ export const NavPages = [
     name: "Reviews",
     href: "/reviews",
   },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
 ];
